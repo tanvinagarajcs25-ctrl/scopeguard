@@ -1,0 +1,1 @@
+# All Hindsight memory operations

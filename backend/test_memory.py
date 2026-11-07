@@ -126,21 +126,47 @@ def test_ledger_calculation():
         memory._history_ledger = old_history
         memory._session_feedback = old_feedback
 
+
 def test_heldout_messages_are_excluded():
-    messages = [
-        {"id": "history-001", "split": "history"},
-        {"id": "heldout-001", "split": "heldout"},
+    # Capture retained text without contacting Hindsight.
+    original_retain = memory._retain
+    captured = []
+
+    def fake_retain(text, date=None):
+        captured.append(text)
+
+    test_messages = SAMPLE_MESSAGES + [
+        {
+            "id": "heldout-001",
+            "date": "2026-10-20",
+            "sender": "Client",
+            "channel": "chat",
+            "text": "This heldout message must not be retained.",
+            "split": "heldout",
+        }
     ]
 
-    retained_candidates = [
-        item for item in messages
-        if item.get("split") == "history"
-    ]
+    try:
+        memory._retain = fake_retain
 
-    assert len(retained_candidates) == 1
-    assert retained_candidates[0]["id"] == "history-001"
+        memory.load_history(
+            test_messages,
+            SAMPLE_TEST_CASES,
+            SAMPLE_DECISIONS,
+        )
 
-    print("PASS: Heldout messages are excluded.")
+        assert len(captured) == 5
+        assert all("heldout-001" not in text for text in captured)
+        assert all(
+            "heldout message must not be retained" not in text
+            for text in captured
+        )
+
+        print("PASS: Actual load_history excludes heldout messages.")
+
+    finally:
+        memory._retain = original_retain
+
 
 if __name__ == "__main__":
     test_required_functions_exist()

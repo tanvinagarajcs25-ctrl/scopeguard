@@ -26,6 +26,11 @@ API_KEY = os.getenv("HINDSIGHT_API_KEY")
 BASE_URL = os.getenv("HINDSIGHT_BASE_URL")
 BANK_ID = os.getenv("HINDSIGHT_BANK_ID", "scopeguard-main")
 
+ALLOW_BANK_RESET = (
+    os.getenv("SCOPEGUARD_ALLOW_BANK_RESET", "false").lower()
+    == "true"
+)
+
 # Create one Hindsight client and reuse it.
 client = (
     Hindsight(base_url=BASE_URL, api_key=API_KEY)
@@ -380,6 +385,11 @@ def reset_bank() -> None:
 
     WARNING: This permanently deletes memories in that bank.
     """
+    if not ALLOW_BANK_RESET:
+        raise RuntimeError(
+            "Bank reset disabled. Set SCOPEGUARD_ALLOW_BANK_RESET=true "
+            "only when intentionally resetting the development bank."
+        )
     if BANK_ID != "scopeguard-main":
         raise RuntimeError(
             "Reset blocked: unexpected Hindsight bank ID."

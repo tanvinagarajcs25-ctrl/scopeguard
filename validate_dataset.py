@@ -1,4 +1,5 @@
 import json
+import sys
 from pathlib import Path
 from datetime import date
 
@@ -36,6 +37,39 @@ check(sum(m["split"] == "heldout" for m in messages) == 6,
 
 message_map = {m["id"]: m for m in messages}
 clause_ids = {c["id"] for c in sow["clauses"]}
+# 1A. Check SOW details
+check(sow["client"] == "Sharma Retail",
+      "Incorrect client name")
+
+check(sow["freelancer"] == "Priya",
+      "Incorrect freelancer name")
+
+check(sow["project"] == "E-commerce mobile app",
+      "Incorrect project name")
+
+check(sow["price_inr"] == 300000,
+      "Incorrect contract price")
+
+check(sow["duration_weeks"] == 8,
+      "Incorrect project duration")
+
+check(sow["start_date"] == "2026-09-14",
+      "Incorrect project start date")
+
+check(sow["extra_work_rate_inr_per_hour"] == 1500,
+      "Incorrect extra work rate")
+
+check(sow["revision_rounds_included"] == 2,
+      "Incorrect revision rounds")
+
+check(len(sow["clauses"]) == 10,
+      "Expected 10 SOW clauses")
+
+check(len(sow["exclusions"]) == 2,
+      "Expected 2 SOW exclusions")
+
+check(len(clause_ids) == len(sow["clauses"]),
+      "Duplicate SOW clause IDs")
 
 # 2. Check decisions
 check(len(decisions) == 8, "Expected 8 decisions")
@@ -160,5 +194,8 @@ if errors:
     print("\nVALIDATION FAILED")
     for error in errors:
         print("-", error)
+
+    sys.exit(1)
 else:
     print("\nALL CHECKS PASSED!")
+    sys.exit(0)

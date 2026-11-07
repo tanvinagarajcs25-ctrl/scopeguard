@@ -1,1 +1,66 @@
-{}
+{
+  "client": "Sharma Retail",
+  "freelancer": "Priya",
+  "project": "E-commerce mobile app",
+  "price_inr": 300000,
+  "duration_weeks": 8,
+  "start_date": "2026-09-14",
+  "extra_work_rate_inr_per_hour": 1500,
+  "revision_rounds_included": 2,
+  "clauses": [
+    {
+      "id": "SOW-1",
+      "title": "Product catalogue",
+      "text": "The app will display the client's product catalogue with product categories, search functionality and individual product detail pages. Customers will be able to browse products and view their descriptions and prices."
+    },
+    {
+      "id": "SOW-2",
+      "title": "Shopping cart",
+      "text": "Customers will be able to add products to their shopping cart, remove items and change product quantities. The cart will display the selected items and the updated order total before checkout."
+    },
+    {
+      "id": "SOW-3",
+      "title": "Checkout with UPI payments",
+      "text": "The app will provide a checkout flow with UPI payment integration. After a successful payment, the customer will receive an order confirmation through the app."
+    },
+    {
+      "id": "SOW-4",
+      "title": "Order tracking",
+      "text": "Customers will be able to view the status of their placed orders through the app. The tracking screen will display the available order status information."
+    },
+    {
+      "id": "SOW-5",
+      "title": "Basic admin panel",
+      "text": "The project includes a basic admin panel for Sharma Retail staff to manage products and view orders. The panel should provide the main tools needed for everyday store administration."
+    },
+    {
+      "id": "SOW-6",
+      "title": "Push notifications",
+      "text": "The app will include push notifications for orders so customers can receive important updates about their purchases. Notifications should keep customers informed about relevant activity in the app."
+    },
+    {
+      "id": "SOW-7",
+      "title": "User accounts",
+      "text": "Customers will be able to create accounts and log in using their mobile phone numbers and OTP verification. Their accounts will allow them to access their shopping and order information."
+    },
+    {
+      "id": "SOW-8",
+      "title": "Design and revisions",
+      "text": "The app screens will follow an agreed visual design suitable for Sharma Retail. Two revision rounds are included for delivered screens, with each round consisting of one consolidated list of requested changes."
+    },
+    {
+      "id": "SOW-9",
+      "title": "Timeline, milestones and payment",
+      "text": "Work starts on 2026-09-14 and runs for 8 weeks. Milestone 1, design sign-off, is scheduled for 2026-09-28; Milestone 2, feature-complete build, is scheduled for 2026-10-19; final delivery is scheduled for 2026-11-08. Payment will be made in three instalments: 30% at project start, 40% at Milestone 1 and the remaining 30% at final delivery."
+    },
+    {
+      "id": "SOW-10",
+      "title": "Extra work and change requests",
+      "text": "Any work requested outside the agreed scope of this statement of work will be treated as additional work. Such work will be billed at INR 1500 per hour and will begin only after written approval from the client."
+    }
+  ],
+  "exclusions": [
+    "Third-party messaging integrations such as WhatsApp or SMS gateways.",
+    "Multi-language support; the app will be available in English only."
+  ]
+}

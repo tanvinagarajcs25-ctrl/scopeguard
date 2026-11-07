@@ -2,16 +2,17 @@ import json
 import os
 import re
 import time
+from pathlib import Path
 
 from dotenv import load_dotenv
 from groq import Groq
-
 
 # ============================================================
 # 1. CONFIGURATION
 # ============================================================
 
-load_dotenv()
+ENV_PATH = Path(__file__).resolve().parent.parent / ".env"
+load_dotenv(dotenv_path=ENV_PATH, override=True)
 
 PRIMARY_MODEL = "openai/gpt-oss-120b"
 FALLBACK_MODEL = "openai/gpt-oss-20b"

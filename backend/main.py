@@ -277,3 +277,27 @@ def analyze_message(request: AnalyzeRequest):
             status_code=500,
             detail=f"Analysis failed: {str(error)}"
         )
+
+@app.post("/reset")
+def reset_memory_bank():
+    """Reset the Hindsight bank when explicitly authorized."""
+
+    try:
+        memory.reset_bank()
+
+        return {
+            "status": "ok",
+            "message": "Memory bank reset successfully."
+        }
+
+    except RuntimeError as error:
+        raise HTTPException(
+            status_code=403,
+            detail=str(error)
+        )
+
+    except Exception as error:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Bank reset failed: {str(error)}"
+        )

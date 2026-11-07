@@ -419,22 +419,31 @@ def reset_bank() -> None:
 # 8. UNPAID EXTRA-WORK LEDGER
 # --------------------------------------------------
 
+
 def get_ledger() -> dict:
     """
     Return out-of-scope work that was waived or not charged.
-
-    This function uses local Python data only.
-    It does not call Hindsight.
+    Each message is counted only once.
     """
-    items = []
+    items_by_id = {}
 
     # Historical unpaid extras.
     for item in _history_ledger:
         if item["decision"] in ("waive", "not recorded"):
-            items.append(item.copy())
+            key = item.get("message_id") or (
+                item.get("date"), item.get("summary")
+            )
+            items_by_id[key] = item.copy()
 
-    # Feedback from the current session that was waived.
-    items.extend(item.copy() for item in _session_feedback)
+    # Current-session feedback.
+    # New feedback replaces an older entry for the same message.
+    for item in _session_feedback:
+        key = item.get("message_id") or (
+            item.get("date"), item.get("summary")
+        )
+        items_by_id[key] = item.copy()
+
+    items = list(items_by_id.values())
 
     total_cost = sum(
         item.get("cost_inr", 0)
@@ -446,6 +455,7 @@ def get_ledger() -> dict:
         "total_cost_inr": total_cost,
         "items": items,
     }
+
 
 def close_client() -> None:
     """Close the shared Hindsight client during application shutdown."""

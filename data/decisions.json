@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "message_id": "msg-001",
+    "decision": "waive",
+    "note": "Adding product categories is a small catalogue adjustment, so I included it without extra charges.",
+    "date": "2026-09-17"
+  },
+  {
+    "message_id": "msg-002",
+    "decision": "charge",
+    "note": "A wishlist requires additional screens and functionality, so I explained the extra cost before proceeding.",
+    "date": "2026-09-20"
+  },
+  {
+    "message_id": "msg-006",
+    "decision": "waive",
+    "note": "I accepted the consolidated design changes as part of the included revision work.",
+    "date": "2026-09-27"
+  },
+  {
+    "message_id": "msg-007",
+    "decision": "edit",
+    "note": "I reduced the request to a simple order summary in the existing admin panel instead of adding a full sales analytics dashboard.",
+    "date": "2026-09-30"
+  },
+  {
+    "message_id": "msg-009",
+    "decision": "charge",
+    "note": "WhatsApp integration needs additional third-party work, so I shared the additional charges.",
+    "date": "2026-10-04"
+  },
+  {
+    "message_id": "msg-010",
+    "decision": "charge",
+    "note": "Bulk Excel product uploads require additional functionality, so I quoted the extra work.",
+    "date": "2026-10-07"
+  },
+  {
+    "message_id": "msg-012",
+    "decision": "charge",
+    "note": "Card payment integration is additional to the agreed UPI checkout, so I explained the extra cost.",
+    "date": "2026-10-10"
+  },
+  {
+    "message_id": "msg-013",
+    "decision": "waive",
+    "note": "Product descriptions and prices are already part of the agreed catalogue, so no additional charge applies.",
+    "date": "2026-10-12"
+  }
+]

@@ -12,6 +12,9 @@ from backend.dev_samples import (
     SAMPLE_DECISIONS,
 )
 
+import json
+from pathlib import Path
+
 
 def test_required_functions_exist():
     required = [
@@ -168,6 +171,106 @@ def test_heldout_messages_are_excluded():
         memory._retain = original_retain
 
 
+def test_real_dataset_integration():
+    """Test the actual committed dataset without contacting Hindsight."""
+
+    data_dir = Path(__file__).resolve().parents[1] / "data"
+
+    # Read the four real JSON files.
+    with open(data_dir / "sow.json", encoding="utf-8") as f:
+        sow = json.load(f)
+
+    with open(data_dir / "messages.json", encoding="utf-8") as f:
+        messages = json.load(f)
+
+    with open(data_dir / "decisions.json", encoding="utf-8") as f:
+        decisions = json.load(f)
+
+    with open(data_dir / "test_cases.json", encoding="utf-8") as f:
+        test_cases = json.load(f)
+
+    # Capture memory instead of calling Hindsight.
+    original_retain = memory._retain
+    captured = []
+
+    def fake_retain(text, date=None):
+        captured.append({"text": text, "date": date})
+
+    try:
+        memory._retain = fake_retain
+
+        # Test SOW loading.
+        sow_count = memory.load_sow(sow)
+
+        assert sow_count == 11
+        assert len(captured) == 11
+        assert all(
+            item["date"] == "2026-09-14"
+            for item in captured
+        )
+
+        print("PASS: Actual SOW loaded as 11 memories.")
+
+        # Clear captured SOW memories before testing history.
+        captured.clear()
+
+        # Test historical message loading.
+        history_count = memory.load_history(
+            messages, test_cases, decisions
+        )
+
+        assert history_count == 14
+        assert len(captured) == 14
+
+        retained_text = "\n".join(
+            item["text"] for item in captured
+        )
+
+        # Verify heldout messages are excluded.
+        heldout = [
+            item for item in messages
+            if item["split"] == "heldout"
+        ]
+
+        assert len(heldout) == 6
+
+        for item in heldout:
+            assert item["id"] not in retained_text
+
+        print("PASS: Exactly 14 history messages retained.")
+        print("PASS: All 6 heldout messages excluded.")
+
+        # Verify all 8 historical decisions are preserved.
+        for decision in decisions:
+            assert decision["message_id"] in retained_text
+            assert decision["decision"] in retained_text
+
+        print("PASS: All 8 historical decisions preserved.")
+
+        # Specifically verify the edit decision.
+        edit_decisions = [
+            item for item in decisions
+            if item["decision"] == "edit"
+        ]
+
+        assert len(edit_decisions) == 1
+        assert "Decision: edit" in retained_text
+
+        print("PASS: The edit decision is preserved.")
+
+        # Check the ledger.
+        ledger = memory.get_ledger()
+
+        assert isinstance(ledger, dict)
+        assert ledger["count"] == 0
+        assert ledger["total_cost_inr"] == 0
+        assert ledger["items"] == []
+
+        print("PASS: Historical ledger calculation is correct.")
+
+    finally:
+        memory._retain = original_retain
+
 if __name__ == "__main__":
     test_required_functions_exist()
     test_history_filter()
@@ -175,5 +278,6 @@ if __name__ == "__main__":
     test_empty_ledger()
     test_ledger_calculation()
     test_heldout_messages_are_excluded()
+    test_real_dataset_integration()
 
     print("\nAll local tests passed!")

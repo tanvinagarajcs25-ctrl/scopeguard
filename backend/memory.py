@@ -74,11 +74,11 @@ def load_sow(sow: dict) -> int:
 
     Returns the number of memories stored.
     """
-    signed_date = sow.get("signed_date")
+    sow_date = sow.get("start_date")
 
     # Store important commercial terms together.
     summary = (
-        f"[SOW] {signed_date or 'Date not specified'} | "
+        f"[SOW] {sow_date or 'Date not specified'} | "
         f"Project: {sow.get('project', 'Not specified')}. "
         f"Client: {sow.get('client', 'Not specified')}. "
         f"Freelancer: {sow.get('freelancer', 'Not specified')}. "
@@ -90,20 +90,20 @@ def load_sow(sow: dict) -> int:
         f"Exclusions: {', '.join(sow.get('exclusions', []))}."
     )
 
-    _retain(summary, signed_date)
+    _retain(summary, sow_date)
 
     count = 1
 
     # Store each SOW clause separately for easier retrieval.
     for clause in sow.get("clauses", []):
         text = (
-            f"[SOW] {signed_date or 'Date not specified'} | "
+            f"[SOW] {sow_date or 'Date not specified'} | "
             f"Clause ID: {clause.get('id')}. "
             f"Title: {clause.get('title')}. "
             f"Details: {clause.get('text')}."
         )
 
-        _retain(text, signed_date)
+        _retain(text, sow_date)
         count += 1
 
     print(f"Stored {count} SOW memories.")
@@ -430,7 +430,7 @@ def get_ledger() -> dict:
 
     # Historical unpaid extras.
     for item in _history_ledger:
-        if item["decision"] != "charge":
+        if item["decision"] in ("waive", "not recorded"):
             items.append(item.copy())
 
     # Feedback from the current session that was waived.

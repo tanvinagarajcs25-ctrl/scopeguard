@@ -1,80 +1,107 @@
-"""Deterministic sample data for running the ScopeGuard UI without the API."""
+"""Sharma Retail sample inbox, SOW analysis, ledger, and memory data (INR)."""
 
 messages = [
     {
         "id": "msg-001",
-        "client": "Northstar Studio",
-        "sender": "Maya Chen",
-        "subject": "One more section for the launch page?",
-        "preview": "Could we add a short FAQ section before Friday's launch?",
-        "body": "Could we add a short FAQ section to the launch page before Friday? It would be about six questions. The current page looks great—thanks!",
+        "client": "Sharma Retail",
+        "sender": "Priya Sharma",
+        "subject": "Add a wishlist to the app",
+        "preview": "Could we add a wishlist so shoppers can save products?",
+        "body": "Could we add a wishlist so shoppers can save products and come back to them later?",
         "received": "10:42 AM",
-        "status": "Needs review",
     },
     {
         "id": "msg-002",
-        "client": "Northstar Studio",
-        "sender": "Maya Chen",
-        "subject": "Re: Homepage design",
-        "preview": "The revised hero looks good. Could you also make a mobile variant?",
-        "body": "The revised hero looks good. Could you also make a mobile variant? I think that should be a quick change.",
+        "client": "Sharma Retail",
+        "sender": "Priya Sharma",
+        "subject": "Change the checkout button label",
+        "preview": "Please change the checkout button label from Continue to Place order.",
+        "body": "Please change the checkout button label from Continue to Place order on the checkout screen.",
         "received": "Yesterday",
-        "status": "Needs review",
     },
     {
         "id": "msg-003",
-        "client": "Greenfield Goods",
-        "sender": "Jordan Lee",
-        "subject": "Invoice and final files",
-        "preview": "Payment is sent. Please send over the final brand files.",
-        "body": "Payment is sent. Please send over the final brand files when you have a moment.",
+        "client": "Sharma Retail",
+        "sender": "Priya Sharma",
+        "subject": "Personalized product recommendations",
+        "preview": "Can the home screen show recommendations based on purchase history?",
+        "body": "Could the home screen show product recommendations based on each shopper's purchase history? We are not sure if this is included in the app scope.",
         "received": "Yesterday",
-        "status": "In scope",
     },
 ]
 
-ANALYZE_ON = {
-    "verdict": "OUT_OF_SCOPE",
-    "confidence": 0.94,
-    "title": "Likely out of scope",
-    "summary": "The signed agreement covers a landing page, but does not include FAQ copy or an FAQ section.",
-    "reason": "The request adds a new content section (approximately six questions), beyond the agreed landing-page deliverable.",
-    "sow_reference": "Section 2 · Deliverables: one responsive launch landing page with supplied copy.",
-    "estimated_hours": 1.5,
-    "estimated_value": 180,
-    "currency": "USD",
-    "suggested_reply": "Happy to add the FAQ section. It falls outside the current landing page scope, so I can send a small change order for approval before I start. Would you like me to do that?",
-    "memory_used": True,
-    "memory_note": "On the previous extra request, you chose to charge for the additional work.",
+SOW = {
+    "client": "Sharma Retail",
+    "project": "E-commerce mobile app",
+    "rate_inr_per_hour": 1500,
+    "clauses": [
+        {"id": "SOW-2.1", "text": "Deliver a customer-facing e-commerce mobile app for iOS and Android."},
+        {"id": "SOW-2.2", "text": "Includes product catalogue, product details, cart, and checkout flows."},
+        {"id": "SOW-2.3", "text": "Includes account sign-in and order history."},
+        {"id": "SOW-4.1", "text": "New features or integrations beyond listed deliverables require a change request."},
+    ],
 }
 
-ANALYZE_OFF = {
-    **ANALYZE_ON,
-    "memory_used": False,
-    "memory_note": None,
+ANALYSES = {
+    "msg-001": {
+        "verdict": "out_of_scope",
+        "reasoning": "A wishlist is a new customer feature and is not listed among the agreed catalogue, cart, checkout, account, or order-history deliverables.",
+        "sow_clause_ids": ["SOW-2.1", "SOW-2.2", "SOW-4.1"],
+        "estimated_hours": 8,
+        "estimated_cost_inr": 12000,
+        "recalled_memories": ["Sharma Retail extra-work rate: ₹1,500 per hour."],
+        "evidence": ["Requested feature: save products to a wishlist", "No wishlist deliverable appears in the SOW."],
+        "creep": True,
+        "error": None,
+    },
+    "msg-002": {
+        "verdict": "in_scope",
+        "reasoning": "This is a small copy change to the existing checkout screen, which is an agreed deliverable.",
+        "sow_clause_ids": ["SOW-2.2"],
+        "estimated_hours": 0.5,
+        "estimated_cost_inr": 0,
+        "recalled_memories": [],
+        "evidence": ["The requested button is on the checkout screen."],
+        "creep": False,
+        "error": None,
+    },
+    "msg-003": {
+        "verdict": "grey_area",
+        "reasoning": "Recommendations use the product catalogue and purchase history, but the SOW does not define personalized or algorithmic recommendations. Confirm whether this is a simple catalogue view or a new integration before estimating final scope.",
+        "sow_clause_ids": ["SOW-2.2", "SOW-2.3", "SOW-4.1"],
+        "estimated_hours": 4,
+        "estimated_cost_inr": 6000,
+        "recalled_memories": ["Sharma Retail extra-work rate: ₹1,500 per hour."],
+        "evidence": ["Request depends on purchase history", "No personalization feature is specified in the SOW."],
+        "creep": None,
+        "error": None,
+    },
 }
+
+# Keep named fixtures available for consumers that want a verdict-specific sample.
+ANALYZE_ON = ANALYSES["msg-001"]
+ANALYZE_OFF = ANALYSES["msg-001"]
 
 FEEDBACK = {"success": True, "message": "Decision saved.", "decision": "charge"}
 
 REFLECT = {
     "retained": [
-        {"text": "Northstar Studio SOW: one responsive launch landing page using client supplied copy.", "source": "Signed SOW", "date": "Oct 14"},
-        {"text": "FAQ writing and additional content sections are not listed as deliverables.", "source": "Scope notes", "date": "Oct 14"},
+        {"text": "Sharma Retail SOW: e-commerce mobile app for iOS and Android.", "source": "Signed SOW", "date": "Nov 1"},
+        {"text": "Product catalogue, product details, cart, checkout, account sign-in, and order history are included.", "source": "Deliverables", "date": "Nov 1"},
     ],
     "recalled": [
-        {"text": "A similar extra request was charged at $120/hour and approved.", "source": "Decision history", "date": "Oct 28"},
+        {"text": "Agreed extra-work rate is ₹1,500 per hour.", "source": "Rate card", "date": "Nov 1"},
     ],
     "learned": [
-        {"text": "For Northstar Studio, you prefer to charge for requests that add new deliverables.", "source": "Your past decisions", "date": "Oct 28"},
+        {"text": "New app features require a written change request before work begins.", "source": "Project decisions", "date": "Nov 3"},
     ],
 }
 
 LEDGER = {
-    "unpaid_extra_asks": 2,
-    "total_value": 360,
-    "currency": "USD",
+    "unpaid_extra_asks": 1,
+    "total_value_inr": 12000,
+    "currency": "INR",
     "items": [
-        {"client": "Northstar Studio", "description": "FAQ section", "value": 180, "status": "Awaiting approval"},
-        {"client": "Northstar Studio", "description": "Mobile hero variant", "value": 180, "status": "Awaiting approval"},
+        {"client": "Sharma Retail", "description": "Wishlist feature", "estimated_hours": 8, "estimated_cost_inr": 12000, "status": "Awaiting approval"},
     ],
 }

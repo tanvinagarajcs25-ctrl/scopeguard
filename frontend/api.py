@@ -1,5 +1,6 @@
-"""Small client for ScopeGuard's API, with a delay-backed local mock mode."""
+"""ScopeGuard API client with deterministic local mock responses."""
 
+import copy
 import time
 from typing import Any
 
@@ -7,15 +8,11 @@ import requests
 
 import mock_data
 
-
 DEFAULT_API_URL = "http://localhost:8000"
 
 
 def _mock(value: Any) -> Any:
     time.sleep(1)
-    # Return a fresh value so callers cannot mutate the shared fixtures.
-    import copy
-
     return copy.deepcopy(value)
 
 
@@ -23,9 +20,7 @@ def _request(method: str, path: str, *, api_url: str, timeout: float = 10, **kwa
     try:
         response = requests.request(method, f"{api_url.rstrip('/')}{path}", timeout=timeout, **kwargs)
         response.raise_for_status()
-        if not response.content:
-            return {"success": True}
-        return response.json()
+        return response.json() if response.content else {"success": True}
     except requests.RequestException as exc:
         return {"error": f"Could not reach ScopeGuard API: {exc}"}
     except ValueError as exc:
@@ -33,25 +28,62 @@ def _request(method: str, path: str, *, api_url: str, timeout: float = 10, **kwa
 
 
 def health(*, mock: bool = False, api_url: str = DEFAULT_API_URL) -> Any:
-    return _mock({"status": "ok", "mode": "mock"}) if mock else _request("GET", "/health", api_url=api_url)
+    return _mock({"status": "ok"}) if mock else _request("GET", "/health", api_url=api_url)
 
 
 def get_messages(*, mock: bool = False, api_url: str = DEFAULT_API_URL) -> Any:
     return _mock(mock_data.messages) if mock else _request("GET", "/messages", api_url=api_url)
 
 
-def analyze(message: Any, *, memory: bool = True, mock: bool = False, api_url: str = DEFAULT_API_URL) -> Any:
+def analyze(msg_id: str, text: str, memory_on: bool, *, mock: bool = False, api_url: str = DEFAULT_API_URL) -> Any:
     if mock:
-        return _mock(mock_data.ANALYZE_ON if memory else mock_data.ANALYZE_OFF)
-    return _request("POST", "/analyze", api_url=api_url, json={"message": message, "memory": memory})
+        return _mock(mock_data.ANALYSES.get(msg_id, mock_data.ANALYSES["msg-003"]))
+    return _request(
+        "POST", "/analyze", api_url=api_url,
+        json={"message_id": msg_id, "message": text, "memory_on": bool(memory_on)},
+    )
 
 
-def send_feedback(message_id: str, decision: str, details: Any = None, *, mock: bool = False, api_url: str = DEFAULT_API_URL) -> Any:
+def feedback(
+    message_id: str,
+    message: str,
+    verdict: str,
+    estimated_hours: float,
+    estimated_cost_inr: float,
+    decision: str,
+    note: str,
+    *, mock: bool = False,
+    api_url: str = DEFAULT_API_URL,
+) -> Any:
+    payload = {
+        "message_id": message_id,
+        "message": message,
+        "verdict": verdict,
+        "estimated_hours": estimated_hours,
+        "estimated_cost_inr": estimated_cost_inr,
+        "decision": decision,
+        "note": note,
+    }
     if mock:
         result = _mock(mock_data.FEEDBACK)
         result["decision"] = decision
         return result
-    return _request("POST", "/feedback", api_url=api_url, json={"message_id": message_id, "decision": decision, "details": details})
+    return _request("POST", "/feedback", api_url=api_url, json=payload)
+
+
+def send_feedback(message_id: str, decision: str, details: Any = None, *, mock: bool = False, api_url: str = DEFAULT_API_URL) -> Any:
+    details = details or {}
+    return feedback(
+        message_id,
+        str(details.get("message", "")),
+        str(details.get("verdict", "grey_area")),
+        float(details.get("estimated_hours", 0) or 0),
+        float(details.get("estimated_cost_inr", 0) or 0),
+        decision,
+        str(details.get("note", "")),
+        mock=mock,
+        api_url=api_url,
+    )
 
 
 def get_reflect(*, mock: bool = False, api_url: str = DEFAULT_API_URL) -> Any:
@@ -64,8 +96,8 @@ def get_ledger(*, mock: bool = False, api_url: str = DEFAULT_API_URL) -> Any:
 
 def load_data(*, mock: bool = False, api_url: str = DEFAULT_API_URL) -> Any:
     if mock:
-        return _mock({"success": True, "message": "Sample data is ready."})
-    return _request("POST", "/load-data", api_url=api_url)
+        return _mock({"success": True, "message": "Sharma Retail sample data is ready."})
+    return _request("POST", "/load", api_url=api_url)
 
 
 def reset(*, mock: bool = False, api_url: str = DEFAULT_API_URL) -> Any:

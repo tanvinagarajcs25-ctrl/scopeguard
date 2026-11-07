@@ -1,1 +1,162 @@
-[]
+[
+  {
+    "id": "msg-001",
+    "date": "2026-09-16",
+    "sender": "Rahul Sharma",
+    "channel": "WhatsApp",
+    "text": "Can we add a few product categories on the catalogue page so customers can find things more easily?",
+    "split": "history"
+  },
+  {
+    "id": "msg-002",
+    "date": "2026-09-18",
+    "sender": "Rahul Sharma",
+    "channel": "Email",
+    "text": "I was thinking of adding a wishlist button so customers can save products and come back to them later.",
+    "split": "history"
+  },
+  {
+    "id": "msg-003",
+    "date": "2026-09-20",
+    "sender": "Rahul Sharma",
+    "channel": "WhatsApp",
+    "text": "When someone adds two items to the cart, they should be able to increase or decrease the quantity before placing the order.",
+    "split": "history"
+  },
+  {
+    "id": "msg-004",
+    "date": "2026-09-22",
+    "sender": "Rahul Sharma",
+    "channel": "WhatsApp",
+    "text": "For customer login, can we send an OTP to their mobile number instead of asking them to create a password?",
+    "split": "history"
+  },
+  {
+    "id": "msg-005",
+    "date": "2026-09-24",
+    "sender": "Rahul Sharma",
+    "channel": "Email",
+    "text": "Please make sure customers can complete their checkout using UPI and see a confirmation once the payment goes through.",
+    "split": "history"
+  },
+  {
+    "id": "msg-006",
+    "date": "2026-09-26",
+    "sender": "Rahul Sharma",
+    "channel": "WhatsApp",
+    "text": "I saw the home screen design. Can we try a different arrangement for the banners and buttons? I'll send you one combined list of changes.",
+    "split": "history"
+  },
+  {
+    "id": "msg-007",
+    "date": "2026-09-28",
+    "sender": "Rahul Sharma",
+    "channel": "Email",
+    "text": "It would be useful if the admin panel could show a summary of daily sales and the best-selling products. Can we include that?",
+    "split": "history"
+  },
+  {
+    "id": "msg-008",
+    "date": "2026-09-30",
+    "sender": "Rahul Sharma",
+    "channel": "WhatsApp",
+    "text": "Customers should be able to open their orders and check whether each one is confirmed, packed or delivered.",
+    "split": "history"
+  },
+  {
+    "id": "msg-009",
+    "date": "2026-10-02",
+    "sender": "Rahul Sharma",
+    "channel": "WhatsApp",
+    "text": "Can we send order updates directly to customers through WhatsApp messages as well?",
+    "split": "history"
+  },
+  {
+    "id": "msg-010",
+    "date": "2026-10-04",
+    "sender": "Rahul Sharma",
+    "channel": "Email",
+    "text": "We have hundreds of products. Can you add an option to upload all their details together using an Excel file?",
+    "split": "history"
+  },
+  {
+    "id": "msg-011",
+    "date": "2026-10-06",
+    "sender": "Rahul Sharma",
+    "channel": "WhatsApp",
+    "text": "Can we also notify customers whenever we launch a sale or have special discounts? It might help bring them back to the app.",
+    "split": "history"
+  },
+  {
+    "id": "msg-012",
+    "date": "2026-10-08",
+    "sender": "Rahul Sharma",
+    "channel": "Email",
+    "text": "Some customers prefer cards. Could we also provide credit and debit card payment options during checkout?",
+    "split": "history"
+  },
+  {
+    "id": "msg-013",
+    "date": "2026-10-11",
+    "sender": "Rahul Sharma",
+    "channel": "WhatsApp",
+    "text": "On each product page, please show the product description and its price clearly along with the other details.",
+    "split": "history"
+  },
+  {
+    "id": "msg-014",
+    "date": "2026-10-15",
+    "sender": "Rahul Sharma",
+    "channel": "Email",
+    "text": "Can customers see the current status of their orders whenever they open the tracking screen?",
+    "split": "history"
+  },
+  {
+    "id": "msg-015",
+    "date": "2026-10-16",
+    "sender": "Rahul Sharma",
+    "channel": "WhatsApp",
+    "text": "A lot of our customers are more comfortable with Hindi. Can we make the entire app available in Hindi too?",
+    "split": "heldout"
+  },
+  {
+    "id": "msg-016",
+    "date": "2026-10-17",
+    "sender": "Rahul Sharma",
+    "channel": "Email",
+    "text": "Can we create separate admin logins for our store manager and other staff, with different permissions for each person?",
+    "split": "heldout"
+  },
+  {
+    "id": "msg-017",
+    "date": "2026-10-19",
+    "sender": "Rahul Sharma",
+    "channel": "WhatsApp",
+    "text": "After seeing the updated screens, I would like to change the overall look of the app. Can we start with a completely different design direction?",
+    "split": "heldout"
+  },
+  {
+    "id": "msg-018",
+    "date": "2026-10-20",
+    "sender": "Rahul Sharma",
+    "channel": "Email",
+    "text": "Could we introduce a loyalty points system where customers earn points on every purchase and redeem them later?",
+    "split": "heldout"
+  },
+  {
+    "id": "msg-019",
+    "date": "2026-10-22",
+    "sender": "Rahul Sharma",
+    "channel": "WhatsApp",
+    "text": "Can customers filter the product catalogue by category so they can quickly find the type of item they want?",
+    "split": "heldout"
+  },
+  {
+    "id": "msg-020",
+    "date": "2026-10-23",
+    "sender": "Rahul Sharma",
+    "channel": "Email",
+    "text": "Can our staff update stock quantities from the admin panel and get an alert when a product is running low?",
+    "split": "heldout"
+  }
+]

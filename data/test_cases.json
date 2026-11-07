@@ -1,1 +1,162 @@
-[]
+[
+  {
+    "message_id": "msg-001",
+    "verdict": "in_scope",
+    "sow_clause_ids": ["SOW-1"],
+    "estimated_hours": 0,
+    "estimated_cost_inr": 0,
+    "related_message_ids": []
+  },
+  {
+    "message_id": "msg-002",
+    "verdict": "out_of_scope",
+    "sow_clause_ids": [],
+    "estimated_hours": 3,
+    "estimated_cost_inr": 4500,
+    "related_message_ids": ["msg-001"]
+  },
+  {
+    "message_id": "msg-003",
+    "verdict": "in_scope",
+    "sow_clause_ids": ["SOW-2"],
+    "estimated_hours": 0,
+    "estimated_cost_inr": 0,
+    "related_message_ids": ["msg-002"]
+  },
+  {
+    "message_id": "msg-004",
+    "verdict": "in_scope",
+    "sow_clause_ids": ["SOW-7"],
+    "estimated_hours": 0,
+    "estimated_cost_inr": 0,
+    "related_message_ids": []
+  },
+  {
+    "message_id": "msg-005",
+    "verdict": "in_scope",
+    "sow_clause_ids": ["SOW-3"],
+    "estimated_hours": 0,
+    "estimated_cost_inr": 0,
+    "related_message_ids": []
+  },
+  {
+    "message_id": "msg-006",
+    "verdict": "grey_area",
+    "sow_clause_ids": ["SOW-8"],
+    "estimated_hours": 1,
+    "estimated_cost_inr": 1500,
+    "related_message_ids": []
+  },
+  {
+    "message_id": "msg-007",
+    "verdict": "grey_area",
+    "sow_clause_ids": ["SOW-5"],
+    "estimated_hours": 4,
+    "estimated_cost_inr": 6000,
+    "related_message_ids": []
+  },
+  {
+    "message_id": "msg-008",
+    "verdict": "in_scope",
+    "sow_clause_ids": ["SOW-4"],
+    "estimated_hours": 0,
+    "estimated_cost_inr": 0,
+    "related_message_ids": ["msg-005"]
+  },
+  {
+    "message_id": "msg-009",
+    "verdict": "out_of_scope",
+    "sow_clause_ids": [],
+    "estimated_hours": 5,
+    "estimated_cost_inr": 7500,
+    "related_message_ids": ["msg-008"]
+  },
+  {
+    "message_id": "msg-010",
+    "verdict": "out_of_scope",
+    "sow_clause_ids": [],
+    "estimated_hours": 3,
+    "estimated_cost_inr": 4500,
+    "related_message_ids": ["msg-007"]
+  },
+  {
+    "message_id": "msg-011",
+    "verdict": "grey_area",
+    "sow_clause_ids": ["SOW-6"],
+    "estimated_hours": 2,
+    "estimated_cost_inr": 3000,
+    "related_message_ids": ["msg-009"]
+  },
+  {
+    "message_id": "msg-012",
+    "verdict": "out_of_scope",
+    "sow_clause_ids": [],
+    "estimated_hours": 4,
+    "estimated_cost_inr": 6000,
+    "related_message_ids": ["msg-005"]
+  },
+  {
+    "message_id": "msg-013",
+    "verdict": "in_scope",
+    "sow_clause_ids": ["SOW-1"],
+    "estimated_hours": 0,
+    "estimated_cost_inr": 0,
+    "related_message_ids": ["msg-001"]
+  },
+  {
+    "message_id": "msg-014",
+    "verdict": "in_scope",
+    "sow_clause_ids": ["SOW-4"],
+    "estimated_hours": 0,
+    "estimated_cost_inr": 0,
+    "related_message_ids": ["msg-008"]
+  },
+  {
+    "message_id": "msg-015",
+    "verdict": "out_of_scope",
+    "sow_clause_ids": [],
+    "estimated_hours": 6,
+    "estimated_cost_inr": 9000,
+    "related_message_ids": []
+  },
+  {
+    "message_id": "msg-016",
+    "verdict": "grey_area",
+    "sow_clause_ids": ["SOW-5"],
+    "estimated_hours": 3,
+    "estimated_cost_inr": 4500,
+    "related_message_ids": ["msg-007"]
+  },
+  {
+    "message_id": "msg-017",
+    "verdict": "grey_area",
+    "sow_clause_ids": ["SOW-8"],
+    "estimated_hours": 8,
+    "estimated_cost_inr": 12000,
+    "related_message_ids": ["msg-006"]
+  },
+  {
+    "message_id": "msg-018",
+    "verdict": "out_of_scope",
+    "sow_clause_ids": [],
+    "estimated_hours": 5,
+    "estimated_cost_inr": 7500,
+    "related_message_ids": []
+  },
+  {
+    "message_id": "msg-019",
+    "verdict": "in_scope",
+    "sow_clause_ids": ["SOW-1"],
+    "estimated_hours": 0,
+    "estimated_cost_inr": 0,
+    "related_message_ids": ["msg-001"]
+  },
+  {
+    "message_id": "msg-020",
+    "verdict": "grey_area",
+    "sow_clause_ids": ["SOW-5"],
+    "estimated_hours": 2,
+    "estimated_cost_inr": 3000,
+    "related_message_ids": ["msg-007"]
+  }
+]
